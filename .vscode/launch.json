@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter",
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+			"args": ["--web-port=8080","--web-hostname=127.0.0.1"],
+        }
+    ]
+}
