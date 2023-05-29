@@ -1,4 +1,4 @@
-import 'package:chatgpt/common/widgets/bubble.dart';
+import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,12 +36,16 @@ class HomepageViewGetX extends GetView<HomepageController> {
           GestureDetector(
             onTap: () {
               homepageController.clear();
+              homepageController.isAtButton.value = false;
             },
             child: const Icon(Icons.refresh),
           ),
           const Padding(padding: EdgeInsets.only(right: 5)),
           GestureDetector(
-            onTap: () => Get.to(() => SettingPage()),
+            onTap: () {
+              homepageController.scrollController.dispose();
+              Get.to(() => SettingPage());
+            },
             child: const Icon(Icons.settings),
           ),
           const Padding(padding: EdgeInsets.only(right: 5)),

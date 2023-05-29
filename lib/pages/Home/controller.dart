@@ -1,12 +1,14 @@
-import 'package:chatgpt/common/api/chatgpt.dart';
-import 'package:chatgpt/common/models/key_model.dart';
-import 'package:chatgpt/common/widgets/bubble.dart';
+import 'package:chatgpt/api/chatgpt.dart';
+import 'package:chatgpt/models/key_model.dart';
+import 'package:chatgpt/pages/Setting/controller.dart';
+import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomepageController extends GetxController {
   ScrollController scrollController = ScrollController();
   TextEditingController textEditingcontroller = TextEditingController();
+  final SettingController settingController = Get.put(SettingController());
   RxBool isAtButton = false.obs;
   List messages = [].obs;
   RxBool loading = false.obs;
@@ -18,10 +20,12 @@ class HomepageController extends GetxController {
     update(["homepage"]);
     await model.load();
     loading.value = true;
-    String result = await ChatGPT(model.key.value).chat('你好');
+    String result = await ChatGPT(model.key.value)
+        .chat('你好', free: settingController.model.free.value);
     messages.add(Bubble(result.toString(), isLeft: false));
     loading.value = false;
     scrollController.addListener(controllerListener);
+    settingController.onReady();
   }
 
   void controllerListener() {
@@ -59,7 +63,8 @@ class HomepageController extends GetxController {
     String send = message.text;
     send = _continueText(message.text);
     send = _isCode(send);
-    String result = await ChatGPT(model.key.value).chat(send);
+    String result = await ChatGPT(model.key.value)
+        .chat(send, free: settingController.model.free.value);
     messages.add(Bubble(result.toString(), isLeft: false));
     jumpToLast();
     loading.value = false;

@@ -1,3 +1,4 @@
+import 'package:chatgpt/pages/Home/controller.dart';
 import 'package:chatgpt/pages/Setting/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 class SettingPage extends GetView<SettingController> {
   SettingPage({super.key});
   final SettingController settingController = Get.put(SettingController());
+  final HomepageController homepageController = Get.put(HomepageController());
 
   Widget settingTextField(BuildContext context) {
     return Padding(
@@ -14,7 +16,7 @@ class SettingPage extends GetView<SettingController> {
           'Key: ',
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
-        const Padding(padding: EdgeInsets.only(left: 10)),
+        const SizedBox(width: 10),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
@@ -53,11 +55,32 @@ class SettingPage extends GetView<SettingController> {
     );
   }
 
+  Widget _freeSwitchButton() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      const Text(
+        '免费使用: ',
+        style: TextStyle(color: Colors.white, fontSize: 25),
+      ),
+      const SizedBox(width: 10),
+      Obx(() => Switch(
+          value: settingController.model.free.value,
+          onChanged: (value) {
+            settingController.model.free.value = value;
+          }))
+    ]);
+  }
+
   Widget _buildView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           '设置',
+        ),
+        leading: BackButton(
+          onPressed: () {
+            homepageController.scrollController = ScrollController();
+            Get.back();
+          },
         ),
       ),
       body: Stack(
@@ -65,8 +88,10 @@ class SettingPage extends GetView<SettingController> {
           Container(color: const Color.fromRGBO(52, 53, 65, 1)),
           Column(
             children: [
-              const Padding(padding: EdgeInsets.only(top: 10)),
+              const SizedBox(height: 10),
               settingTextField(context),
+              const SizedBox(height: 10),
+              _freeSwitchButton()
             ],
           ),
         ],

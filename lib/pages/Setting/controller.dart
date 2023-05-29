@@ -1,4 +1,4 @@
-import 'package:chatgpt/common/models/key_model.dart';
+import 'package:chatgpt/models/key_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +20,11 @@ class SettingController extends GetxController {
 
   void setKey(String text) {
     model.key.value = text;
+    model.save();
+  }
+
+  void changeFree(bool free) {
+    model.free.value = free;
     model.save();
   }
 }
