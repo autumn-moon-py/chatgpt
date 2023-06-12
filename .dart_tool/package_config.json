@@ -122,12 +122,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "nested",
-      "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/nested-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path",
       "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/path-1.8.3",
       "packageUri": "lib/",
@@ -168,12 +162,6 @@
       "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
-    },
-    {
-      "name": "provider",
-      "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/provider-6.0.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
@@ -290,7 +278,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-29T03:34:57.957143Z",
+  "generated": "2023-06-12T08:08:29.929981Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
