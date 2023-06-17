@@ -176,6 +176,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "screen_retriever",
+      "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/screen_retriever-0.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/shared_preferences-2.1.1",
       "packageUri": "lib/",
@@ -284,6 +290,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "window_manager",
+      "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/window_manager-0.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///C:/Users/%E7%A7%8B%E6%9C%88/AppData/Local/Pub/Cache/hosted/mirrors.tuna.tsinghua.edu.cn%2547dart-pub%2547/xdg_directories-1.0.0",
       "packageUri": "lib/",
@@ -296,7 +308,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-17T08:05:51.159183Z",
+  "generated": "2023-06-17T13:46:17.929009Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

@@ -10,16 +10,12 @@ class ChatGPT {
   ///temperature 随机性 0-2 推荐0.6 0.8
   ///n 输出多少条结果
   Future<String> chat(String content,
-      {double temperature = 1, int n = 1, bool free = false}) async {
+      {double temperature = 1, int n = 1}) async {
     if (temperature < 0 || temperature > 2) {
       temperature = 0.8;
     }
     if (n < 0) {
       n = 1;
-    }
-    if (free) {
-      apiUrl = 'https://api.chatanywhere.com.cn';
-      key = 'sk-19ON3CLDktv9PaLyj95bS93Pcd02TekqSq1CaskjPYUnbUe7';
     }
     if (key.isEmpty) {
       return 'Key为空,请去设置页面填写';

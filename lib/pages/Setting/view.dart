@@ -55,20 +55,7 @@ class SettingPage extends GetView<SettingController> {
     );
   }
 
-  Widget _freeSwitchButton() {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      const Text(
-        '免费使用: ',
-        style: TextStyle(color: Colors.white, fontSize: 25),
-      ),
-      const SizedBox(width: 10),
-      Obx(() => Switch(
-          value: settingController.model.free.value,
-          onChanged: (value) {
-            settingController.model.free.value = value;
-          }))
-    ]);
-  }
+
 
   Widget _buildView(BuildContext context) {
     return Scaffold(
@@ -89,9 +76,7 @@ class SettingPage extends GetView<SettingController> {
           Column(
             children: [
               const SizedBox(height: 10),
-              settingTextField(context),
-              const SizedBox(height: 10),
-              _freeSwitchButton()
+              settingTextField(context),          
             ],
           ),
         ],

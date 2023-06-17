@@ -23,8 +23,4 @@ class SettingController extends GetxController {
     model.save();
   }
 
-  void changeFree(bool free) {
-    model.free.value = free;
-    model.save();
-  }
 }

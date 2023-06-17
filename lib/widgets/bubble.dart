@@ -101,18 +101,18 @@ class Bubble extends StatelessWidget {
     List<String> codeBlocks = [];
     int index = 0;
     while (index < input.length) {
-      int start = input.indexOf("```", index);
+      int start = input.indexOf("```", index)+2;
       if (start == -1) {
         break;
       }
       String str = input.substring(start, start + 10);
-      int twoStart = str.indexOf('\r\n');
+      int twoStart = str.indexOf('\r');
       start += twoStart;
       int end = input.indexOf("```", start + 3);
       if (end == -1) {
         break;
       }
-      codeBlocks.add(input.substring(start + 3, end).trim());
+      codeBlocks.add(input.substring(start , end).trim());
       index = end + 3;
     }
     String allCode = '';
@@ -125,3 +125,4 @@ class Bubble extends StatelessWidget {
     return allCode;
   }
 }
+

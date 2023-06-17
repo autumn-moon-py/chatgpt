@@ -24,7 +24,7 @@ class HomepageController extends GetxController {
     await model.load();
     loading.value = true;
     String result = await ChatGPT(model.key.value)
-        .chat('你好', free: settingController.model.free.value);
+        .chat('你好');
     messages.add(Bubble(result.toString(), isLeft: false));
     loading.value = false;
     scrollController.addListener(controllerListener);
@@ -68,7 +68,7 @@ class HomepageController extends GetxController {
     send = _continueText(message.text);
     send = _isCode(send);
     String result = await ChatGPT(model.key.value)
-        .chat(send, free: settingController.model.free.value);
+        .chat(send);
     messages.add(Bubble(result.toString(), isLeft: false));
     if (GetPlatform.isWindows) localNotifier.show('收到新消息');
     jumpToLast();
