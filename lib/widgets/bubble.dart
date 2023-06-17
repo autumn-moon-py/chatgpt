@@ -51,9 +51,12 @@ class Bubble extends StatelessWidget {
             Container(color: const Color.fromRGBO(52, 53, 65, 1)),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: SelectableText(
-                text,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+              child: SizedBox(
+                width: double.infinity,
+                child: SelectableText(
+                  text,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
           ],
@@ -102,6 +105,9 @@ class Bubble extends StatelessWidget {
       if (start == -1) {
         break;
       }
+      String str = input.substring(start, start + 10);
+      int twoStart = str.indexOf('\r\n');
+      start += twoStart;
       int end = input.indexOf("```", start + 3);
       if (end == -1) {
         break;

@@ -5,6 +5,8 @@ import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../service/local_natification.dart';
+
 class HomepageController extends GetxController {
   ScrollController scrollController = ScrollController();
   TextEditingController textEditingcontroller = TextEditingController();
@@ -13,6 +15,7 @@ class HomepageController extends GetxController {
   List messages = [].obs;
   RxBool loading = false.obs;
   RxKeyModel model = RxKeyModel();
+  LocalNotifier localNotifier = LocalNotifier();
 
   HomepageController();
 
@@ -26,6 +29,7 @@ class HomepageController extends GetxController {
     loading.value = false;
     scrollController.addListener(controllerListener);
     settingController.onReady();
+    localNotifier.init();
   }
 
   void controllerListener() {
@@ -66,6 +70,7 @@ class HomepageController extends GetxController {
     String result = await ChatGPT(model.key.value)
         .chat(send, free: settingController.model.free.value);
     messages.add(Bubble(result.toString(), isLeft: false));
+    if (GetPlatform.isWindows) localNotifier.show('收到新消息');
     jumpToLast();
     loading.value = false;
   }
