@@ -1,4 +1,5 @@
 import 'package:local_notifier/local_notifier.dart';
+import 'package:window_manager/window_manager.dart';
 
 class LocalNotifier {
   Future<void> init() async {
@@ -23,7 +24,10 @@ class LocalNotifier {
         default:
       }
     };
-    notification.onClick = () {};
+    notification.onClick = () async {
+      await windowManager.show();
+      await windowManager.focus();
+    };
     notification.onClickAction = (actionIndex) {};
     notification.show();
   }
