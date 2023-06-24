@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RxKeyModel {
+class KeyModel {
   RxString key = ''.obs;
   SharedPreferences? local;
 
-  Future<void> save() async {
+  Future<void> save(String key) async {
     local = await SharedPreferences.getInstance();
-    local?.setString('key', key.value);
+    local?.setString('key', key);
   }
 
   Future<void> load() async {

@@ -2,7 +2,6 @@ import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Setting/view.dart';
 import 'controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,12 +42,11 @@ class HomepageViewGetX extends GetView<HomepageController> {
           const Padding(padding: EdgeInsets.only(right: 5)),
           GestureDetector(
             onTap: () {
-              homepageController.scrollController.dispose();
-              Get.to(() => SettingPage());
+              _showDialog();
             },
-            child: const Icon(Icons.settings),
+            child: const Icon(Icons.key),
           ),
-          const Padding(padding: EdgeInsets.only(right: 5)),
+          const SizedBox(width: 10)
         ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(0),
@@ -140,6 +138,35 @@ class HomepageViewGetX extends GetView<HomepageController> {
             ),
           )
         : const SizedBox();
+  }
+
+  void _showDialog() {
+    Get.dialog(
+      AlertDialog(
+        backgroundColor: const Color.fromRGBO(52, 53, 65, 1),
+        title: const Text('请输入Key', style: TextStyle(color: Colors.white)),
+        content: TextField(
+          controller: homepageController.keyEditingcontroller,
+          style: const TextStyle(color: Colors.white),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('取消'),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          TextButton(
+            child: const Text('确定'),
+            onPressed: () {
+              homepageController.model
+                  .save(homepageController.textEditingcontroller.text);
+              Get.back();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override

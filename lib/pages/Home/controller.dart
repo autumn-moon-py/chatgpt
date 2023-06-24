@@ -1,20 +1,20 @@
 import 'package:chatgpt/api/chatgpt.dart';
 import 'package:chatgpt/models/key_model.dart';
-import 'package:chatgpt/pages/Setting/controller.dart';
 import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../service/local_natification.dart';
 
 class HomepageController extends GetxController {
   ScrollController scrollController = ScrollController();
   TextEditingController textEditingcontroller = TextEditingController();
-  final SettingController settingController = Get.put(SettingController());
+  TextEditingController keyEditingcontroller = TextEditingController();
   RxBool isAtButton = false.obs;
   List messages = [].obs;
   RxBool loading = false.obs;
-  RxKeyModel model = RxKeyModel();
+  KeyModel model = KeyModel();
   LocalNotifier localNotifier = LocalNotifier();
 
   HomepageController();
@@ -23,13 +23,12 @@ class HomepageController extends GetxController {
     update(["homepage"]);
     await model.load();
     loading.value = true;
-    String result = await ChatGPT(model.key.value)
-        .chat('你好');
+    String result = await ChatGPT(model.key.value).chat('你好');
     messages.add(Bubble(result.toString(), isLeft: false));
     loading.value = false;
     scrollController.addListener(controllerListener);
-    settingController.onReady();
     localNotifier.init();
+    keyEditingcontroller.text = model.key.value;
   }
 
   void controllerListener() {
@@ -67,10 +66,11 @@ class HomepageController extends GetxController {
     String send = message.text;
     send = _continueText(message.text);
     send = _isCode(send);
-    String result = await ChatGPT(model.key.value)
-        .chat(send);
+    String result = await ChatGPT(model.key.value).chat(send);
     messages.add(Bubble(result.toString(), isLeft: false));
-    if (GetPlatform.isWindows) localNotifier.show('收到新消息');
+    if (GetPlatform.isWindows && await windowManager.isVisible()) {
+      localNotifier.show('收到新消息');
+    }
     jumpToLast();
     loading.value = false;
   }
@@ -88,12 +88,15 @@ class HomepageController extends GetxController {
 
   String _continueText(String text) {
     String send = '';
-    if (text.substring(text.length - 2, text.length) == '继续') {
-      send = messages[messages.length - 2].text + ',继续';
+    if (text.length > 3) {
+      if (text.substring(text.length - 2, text.length) == '继续') {
+        send = messages[messages.length - 2].text + ',继续';
+      }
+      if (send.isEmpty) {
+        return text;
+      }
+      return send;
     }
-    if (send.isEmpty) {
-      return text;
-    }
-    return send;
+    return text;
   }
 }
