@@ -159,8 +159,10 @@ class HomepageViewGetX extends GetView<HomepageController> {
           TextButton(
             child: const Text('确定'),
             onPressed: () {
+              homepageController.model.key.value =
+                  homepageController.keyEditingcontroller.text;
               homepageController.model
-                  .save(homepageController.textEditingcontroller.text);
+                  .save(homepageController.keyEditingcontroller.text);
               Get.back();
             },
           ),

@@ -3,9 +3,8 @@ import 'package:chatgpt/models/key_model.dart';
 import 'package:chatgpt/widgets/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:window_manager/window_manager.dart';
 
-import '../../service/local_natification.dart';
+import '../service/local_natification.dart';
 
 class HomepageController extends GetxController {
   ScrollController scrollController = ScrollController();
@@ -54,13 +53,14 @@ class HomepageController extends GetxController {
 
   void clear() {
     messages.clear();
+    model.key.value;
     addMessage(const Bubble('你好'));
   }
 
   Future<void> addMessage(Bubble message) async {
     jumpToLast();
     loading.value = true;
-    await model.load();
+    model.key.value;
     messages.add(message);
     textEditingcontroller.text = '';
     String send = message.text;
@@ -68,9 +68,7 @@ class HomepageController extends GetxController {
     send = _isCode(send);
     String result = await ChatGPT(model.key.value).chat(send);
     messages.add(Bubble(result.toString(), isLeft: false));
-    if (GetPlatform.isWindows && await windowManager.isVisible()) {
-      localNotifier.show('收到新消息');
-    }
+    localNotifier.show('收到新消息');
     jumpToLast();
     loading.value = false;
   }

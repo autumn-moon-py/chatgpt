@@ -1,6 +1,5 @@
-import 'package:chatgpt/pages/Home/controller.dart';
+import 'package:chatgpt/home/controller.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -84,7 +83,9 @@ class Bubble extends StatelessWidget {
                       break;
                     case '复制代码':
                       Clipboard.setData(ClipboardData(text: searchCode(text)));
-                      Get.snackbar('提示', '复制成功', colorText: Colors.white);
+                      Get.snackbar('提示', '复制成功',
+                          colorText: Colors.white,
+                          duration: const Duration(seconds: 1));
                       break;
                   }
                 },
@@ -101,19 +102,18 @@ class Bubble extends StatelessWidget {
     List<String> codeBlocks = [];
     int index = 0;
     while (index < input.length) {
-      int start = input.indexOf("```", index)+2;
+      int start = input.indexOf("```", index) + 3;
+      start = input.indexOf("\r", start);
       if (start == -1) {
         break;
       }
-      String str = input.substring(start, start + 10);
-      int twoStart = str.indexOf('\r');
-      start += twoStart;
-      int end = input.indexOf("```", start + 3);
+      int end = input.indexOf("```", start);
       if (end == -1) {
         break;
       }
-      codeBlocks.add(input.substring(start , end).trim());
-      index = end + 3;
+      String code = input.substring(start, end);
+      codeBlocks.add(code);
+      index = end;
     }
     String allCode = '';
     for (var code in codeBlocks) {
@@ -125,4 +125,3 @@ class Bubble extends StatelessWidget {
     return allCode;
   }
 }
-

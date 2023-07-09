@@ -15,20 +15,12 @@ class LocalNotifier {
       body: body,
     );
     notification.onShow = () {};
-    notification.onClose = (closeReason) {
-      switch (closeReason) {
-        case LocalNotificationCloseReason.userCanceled:
-          break;
-        case LocalNotificationCloseReason.timedOut:
-          break;
-        default:
-      }
-    };
+    notification.onClose = (_) {};
     notification.onClick = () async {
       await windowManager.show();
-      await windowManager.focus();
+      await windowManager.maximize();
     };
-    notification.onClickAction = (actionIndex) {};
+    notification.onClickAction = (_) {};
     notification.show();
   }
 }
